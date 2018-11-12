@@ -1,31 +1,29 @@
-package com.zy.concurrency.example.count;
+package com.zy.concurrency.commonunsafe;
 
 import com.zy.concurrency.annotations.NotThreadSafe;
-import lombok.extern.slf4j.Slf4j;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
+import lombok.extern.slf4j.Slf4j;
 
 /**
- * Created by Horizon
- * Time: 下午10:09 2018/6/19
- * Description:
+ * Created by Horizon Time: 下午11:57 2018/11/12 Description:
  */
 @Slf4j
 @NotThreadSafe
-public class CountExample3 {
+public class DateFormatExample1 {
 
-    //请求总数
+    private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+
     public static int clientTotal = 5000;
 
-    //同时并发执行的线程数
     public static int threadTotal = 200;
 
-    //volatile不具有原子性
-    public static volatile int count = 0;
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws InterruptedException {
         ExecutorService executorService = Executors.newCachedThreadPool();
         final Semaphore semaphore = new Semaphore(threadTotal);
         final CountDownLatch countDownLatch = new CountDownLatch(clientTotal);
@@ -33,23 +31,24 @@ public class CountExample3 {
             executorService.execute(() -> {
                 try {
                     semaphore.acquire();
-                    add();
+                    update();
                     semaphore.release();
-                } catch (InterruptedException  e) {
-                    log.error("exception", e);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
                 countDownLatch.countDown();
             });
         }
         countDownLatch.await();
         executorService.shutdown();
-        log.info("count:{}", count);
     }
 
-    private static void add() {
-        count++;
-        // 1.count
-        // 2.+1
-        // 3.count
+    public static  void update() {
+        try {
+            simpleDateFormat.parse("20180208");
+        } catch (ParseException e) {
+            log.error("parse exception", e);
+        }
     }
+
 }

@@ -17,7 +17,7 @@ public class SynnchronizedExample1 {
     public void test1(int j) {
         synchronized (this) {
             for (int i = 0; i < 10; i++) {
-                log.info("test1 - {} - {}", j,i);
+                log.info("test1 - {} - {}", j, i);
             }
         }
     }
@@ -25,19 +25,18 @@ public class SynnchronizedExample1 {
     //修饰一个方法
     public synchronized void test2(int j) {
         for (int i = 0; i < 10; i++) {
-            log.info("test2 - {} - {}", j,i);
+            log.info("test2 - {} - {}", j, i);
         }
     }
 
     public static void main(String[] args) {
         SynnchronizedExample1 example1 = new SynnchronizedExample1();
-        SynnchronizedExample1 example2 = new SynnchronizedExample1();
         ExecutorService executorService = Executors.newCachedThreadPool();
         executorService.execute(() -> {
-            example1.test2(1);
+            example1.test1(10);
         });
         executorService.execute(() -> {
-            example2.test2(2);
+            example1.test1(10);
         });
     }
 

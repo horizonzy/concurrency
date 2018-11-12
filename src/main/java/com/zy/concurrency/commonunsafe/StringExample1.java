@@ -1,31 +1,28 @@
-package com.zy.concurrency.example.count;
+package com.zy.concurrency.commonunsafe;
 
 import com.zy.concurrency.annotations.NotThreadSafe;
-import lombok.extern.slf4j.Slf4j;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
+import lombok.extern.slf4j.Slf4j;
 
 /**
- * Created by Horizon
- * Time: 下午10:09 2018/6/19
- * Description:
+ * Created by Horizon Time: 下午11:44 2018/11/12 Description:
  */
 @Slf4j
 @NotThreadSafe
-public class CountExample3 {
+public class StringExample1 {
 
-    //请求总数
+
     public static int clientTotal = 5000;
 
-    //同时并发执行的线程数
     public static int threadTotal = 200;
 
-    //volatile不具有原子性
-    public static volatile int count = 0;
+    public static StringBuilder builder = new StringBuilder();
 
-    public static void main(String[] args) throws Exception {
+
+    public static void main(String[] args) throws InterruptedException {
         ExecutorService executorService = Executors.newCachedThreadPool();
         final Semaphore semaphore = new Semaphore(threadTotal);
         final CountDownLatch countDownLatch = new CountDownLatch(clientTotal);
@@ -35,21 +32,19 @@ public class CountExample3 {
                     semaphore.acquire();
                     add();
                     semaphore.release();
-                } catch (InterruptedException  e) {
-                    log.error("exception", e);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
                 countDownLatch.countDown();
             });
         }
         countDownLatch.await();
         executorService.shutdown();
-        log.info("count:{}", count);
+        log.info("size:{}", builder.length());
     }
 
-    private static void add() {
-        count++;
-        // 1.count
-        // 2.+1
-        // 3.count
+    public static void add() {
+        builder.append("1");
     }
 }
+
