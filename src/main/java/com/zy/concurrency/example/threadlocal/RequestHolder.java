@@ -1,4 +1,4 @@
-package com.zy.concurrency.threadlocal;
+package com.zy.concurrency.example.threadlocal;
 
 /**
  * Created by Horizon Time: 下午4:16 2018/11/11 Description:

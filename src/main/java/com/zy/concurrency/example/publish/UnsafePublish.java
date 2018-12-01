@@ -1,4 +1,4 @@
-package com.zy.concurrency.publish;
+package com.zy.concurrency.example.publish;
 
 import com.zy.concurrency.annotations.NotThreadSafe;
 import java.util.Arrays;

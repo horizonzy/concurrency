@@ -1,7 +1,7 @@
 package com.zy.concurrency;
 
 
-import com.zy.concurrency.threadlocal.RequestHolder;
+import com.zy.concurrency.example.threadlocal.RequestHolder;
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;

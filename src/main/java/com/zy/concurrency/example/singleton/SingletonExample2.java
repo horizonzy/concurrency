@@ -1,4 +1,4 @@
-package com.zy.concurrency.singleton;
+package com.zy.concurrency.example.singleton;
 
 import com.zy.concurrency.annotations.ThreadSafe;
 

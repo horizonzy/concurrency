@@ -1,51 +1,51 @@
-package com.zy.concurrency.example.atomic;
+package com.zy.concurrency.example.synccontainer;
 
 import com.zy.concurrency.annotations.ThreadSafe;
-import lombok.extern.slf4j.Slf4j;
-
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
-import java.util.concurrent.atomic.LongAdder;
+import lombok.extern.slf4j.Slf4j;
 
-/**
- * Created by Horizon Time: 下午10:09 2018/6/19 Description:
- */
 @Slf4j
 @ThreadSafe
-public class AtomicExample3 {
+public class HashTableExample {
 
-    //请求总数
+
     public static int clientTotal = 5000;
 
-    //同时并发执行的线程数
     public static int threadTotal = 200;
 
-    public static LongAdder count = new LongAdder();
 
-    public static void main(String[] args) throws Exception {
+    private static Hashtable<Integer, Integer> map = new Hashtable<>();
+
+    public static void main(String[] args) throws InterruptedException {
         ExecutorService executorService = Executors.newCachedThreadPool();
-        final Semaphore semaphore = new Semaphore(clientTotal);
+        final Semaphore semaphore = new Semaphore(threadTotal);
         final CountDownLatch countDownLatch = new CountDownLatch(clientTotal);
         for (int i = 0; i < clientTotal; i++) {
+            int finalI = i;
             executorService.execute(() -> {
                 try {
                     semaphore.acquire();
-                    add();
+                    update(finalI);
                     semaphore.release();
                 } catch (InterruptedException e) {
-                    log.error("exception", e);
+                    e.printStackTrace();
                 }
                 countDownLatch.countDown();
             });
         }
         countDownLatch.await();
         executorService.shutdown();
-        log.info("count:{}", count);
+        log.info("size:{}", map.size());
     }
 
-    private static void add() {
-        count.increment();
+    public static void update(int i) {
+        map.put(i, i);
     }
+
 }

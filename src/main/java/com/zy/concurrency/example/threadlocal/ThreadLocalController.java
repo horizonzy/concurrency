@@ -1,4 +1,4 @@
-package com.zy.concurrency.threadlocal;
+package com.zy.concurrency.example.threadlocal;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +15,7 @@ public class ThreadLocalController {
     @ResponseBody
     public Long test() {
         return RequestHolder.getId();
+
     }
 
 }

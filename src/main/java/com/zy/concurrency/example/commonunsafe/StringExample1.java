@@ -1,4 +1,4 @@
-package com.zy.concurrency.commonunsafe;
+package com.zy.concurrency.example.commonunsafe;
 
 import com.zy.concurrency.annotations.NotThreadSafe;
 import java.util.concurrent.CountDownLatch;
@@ -6,24 +6,21 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 import lombok.extern.slf4j.Slf4j;
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 
 /**
- * Created by Horizon Time: 下午11:57 2018/11/12 Description:
+ * Created by Horizon Time: 下午11:44 2018/11/12 Description:
  */
 @Slf4j
 @NotThreadSafe
-public class DateFormatExample3 {
+public class StringExample1 {
 
 
     public static int clientTotal = 5000;
 
     public static int threadTotal = 200;
 
+    public static StringBuilder builder = new StringBuilder();
 
-    private static DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("yyyyMMdd");
 
     public static void main(String[] args) throws InterruptedException {
         ExecutorService executorService = Executors.newCachedThreadPool();
@@ -33,7 +30,7 @@ public class DateFormatExample3 {
             executorService.execute(() -> {
                 try {
                     semaphore.acquire();
-                    update();
+                    add();
                     semaphore.release();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -43,10 +40,11 @@ public class DateFormatExample3 {
         }
         countDownLatch.await();
         executorService.shutdown();
+        log.info("size:{}", builder.length());
     }
 
-    public static void update() {
-        DateTime.parse("20180208", dateTimeFormatter).toDate();
+    public static void add() {
+        builder.append("1");
     }
-
 }
+

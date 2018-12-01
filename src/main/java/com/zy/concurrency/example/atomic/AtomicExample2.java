@@ -11,9 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * Created by Horizon
- * Time: 下午10:09 2018/6/19
- * Description:
+ * Created by Horizon Time: 下午10:09 2018/6/19 Description:
  */
 @Slf4j
 @ThreadSafe

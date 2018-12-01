@@ -6,9 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Created by Horizon
- * Time: 下午11:48 2018/6/18
- * Description: 不推荐的写法
+ * Created by Horizon Time: 下午11:48 2018/6/18 Description: 不推荐的写法
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.SOURCE)

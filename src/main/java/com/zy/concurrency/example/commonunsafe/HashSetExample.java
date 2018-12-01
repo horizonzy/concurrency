@@ -1,8 +1,8 @@
-package com.zy.concurrency.commonunsafe;
+package com.zy.concurrency.example.commonunsafe;
 
 import com.zy.concurrency.annotations.NotThreadSafe;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -10,18 +10,17 @@ import java.util.concurrent.Semaphore;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * Created by Horizon Time: 上午12:18 2018/11/13 Description:
+ * Created by Horizon Time: 下午11:11 2018/11/27 Description:
  */
 @Slf4j
 @NotThreadSafe
-public class ArrayListExample {
-
+public class HashSetExample {
     public static int clientTotal = 5000;
 
     public static int threadTotal = 200;
 
 
-    private static List<Integer> list = new ArrayList();
+    private static Set<Integer> set = new HashSet<>();
 
     public static void main(String[] args) throws InterruptedException {
         ExecutorService executorService = Executors.newCachedThreadPool();
@@ -42,12 +41,10 @@ public class ArrayListExample {
         }
         countDownLatch.await();
         executorService.shutdown();
-        log.info("size:{}",list.size() );
+        log.info("size:{}", set.size () );
     }
 
     public static void update(int i) {
-        list.add(i);
+        set.add(i);
     }
-
-
 }

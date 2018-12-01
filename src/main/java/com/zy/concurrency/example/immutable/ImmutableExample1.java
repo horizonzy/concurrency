@@ -1,4 +1,4 @@
-package com.zy.concurrency.immutable;
+package com.zy.concurrency.example.immutable;
 
 import com.google.common.collect.Maps;
 import com.zy.concurrency.annotations.NotThreadSafe;

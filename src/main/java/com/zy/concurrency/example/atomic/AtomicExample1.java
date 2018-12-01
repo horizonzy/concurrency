@@ -10,9 +10,7 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Created by Horizon
- * Time: 下午10:09 2018/6/19
- * Description:
+ * Created by Horizon Time: 下午10:09 2018/6/19 Description:
  */
 @Slf4j
 @ThreadSafe
@@ -28,7 +26,7 @@ public class AtomicExample1 {
 
     public static void main(String[] args) throws Exception {
         ExecutorService executorService = Executors.newCachedThreadPool();
-        final Semaphore semaphore = new Semaphore(clientTotal);
+        final Semaphore semaphore = new Semaphore(threadTotal);
         final CountDownLatch countDownLatch = new CountDownLatch(clientTotal);
         for (int i = 0; i < clientTotal; i++) {
             executorService.execute(() -> {

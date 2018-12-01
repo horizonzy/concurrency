@@ -8,9 +8,7 @@ import java.util.concurrent.atomic.AtomicLongArray;
 import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
 
 /**
- * Created by Horizon
- * Time: 下午11:27 2018/6/19
- * Description:
+ * Created by Horizon Time: 下午11:27 2018/6/19 Description:
  */
 @Slf4j
 public class AtomicExample5 {
@@ -18,7 +16,8 @@ public class AtomicExample5 {
     @Getter
     private volatile int count = 100;
 
-    private static AtomicIntegerFieldUpdater<AtomicExample5> updater = AtomicIntegerFieldUpdater.newUpdater(AtomicExample5.class, "count");
+    private static AtomicIntegerFieldUpdater<AtomicExample5> updater = AtomicIntegerFieldUpdater
+            .newUpdater(AtomicExample5.class, "count");
 
 
     public static void main(String[] args) {

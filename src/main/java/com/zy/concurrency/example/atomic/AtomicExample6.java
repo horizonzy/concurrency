@@ -8,18 +8,15 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * Created by Horizon
- * Time: 下午11:56 2018/6/19
- * Description:
+ * Created by Horizon Time: 下午11:56 2018/6/19 Description:
  */
 @Slf4j
 @ThreadSafe
 public class AtomicExample6 {
 
-    private static AtomicBoolean isHappened  = new AtomicBoolean(false);
+    private static AtomicBoolean isHappened = new AtomicBoolean(false);
 
     //请求总数
     public static int clientTotal = 5000;
@@ -46,11 +43,11 @@ public class AtomicExample6 {
         }
         countDownLatch.await();
         executorService.shutdown();
-        log.info("isHappended: {}",isHappened.get());
+        log.info("isHappended: {}", isHappened.get());
     }
 
-    private static void test(){
-        if (isHappened.compareAndSet(false,true)){
+    private static void test() {
+        if (isHappened.compareAndSet(false, true)) {
             log.info("execute");
         }
     }
