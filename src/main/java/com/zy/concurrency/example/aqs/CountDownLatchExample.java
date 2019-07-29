@@ -32,6 +32,7 @@ public class CountDownLatchExample {
         }
         countDownLatch.await(10, TimeUnit.MILLISECONDS);
         log.info("finish");
+        System.out.println("this is test");
         executorService.shutdown();
     }
 
